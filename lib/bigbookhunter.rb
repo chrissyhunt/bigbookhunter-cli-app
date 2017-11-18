@@ -5,3 +5,4 @@ module BigBookHunter
 end
 
 require_relative './bigbookhunter/cli'
+require_relative './bigbookhunter/book'
