@@ -4,6 +4,7 @@ class BigBookHunter::CLI
 		puts "Welcome to Big Book Hunter!"
 		list_books
 		menu
+		goodbye
 	end
 
 	def list_books
@@ -13,13 +14,24 @@ class BigBookHunter::CLI
 	end
 
 	def menu
-		puts "Enter the book number for more information, or type \'exit.\'"
-		input = gets.strip
-		case input
-		when "1"
-			puts "More info on The Fedearlist at William Reese."
-		when "2"
-			puts "More info on Candide at Bauman Rare Books."
+		puts "Enter the book number for more information, type \'list\' to see all books again, or type \'exit.\'"
+		input = nil
+		while input != "exit"
+			input = gets.strip.downcase
+			case input
+			when "1"
+				puts "More info on The Fedearlist at William Reese."
+			when "2"
+				puts "More info on Candide at Bauman Rare Books."
+			when "list"
+				list_books
+			else
+				puts "Not sure what you want. Type \'list\' or \'exit\'."
+			end
 		end
+	end
+
+	def goodbye
+		puts "See you tomorrow for more books!"
 	end
 end
