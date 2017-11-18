@@ -1,5 +1,7 @@
-require "bigbookhunter/version"
+require_relative './bigbookhunter/version'
 
-module Bigbookhunter
+module BigBookHunter
   # Your code goes here...
 end
+
+require_relative './bigbookhunter/cli'
