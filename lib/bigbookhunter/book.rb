@@ -24,9 +24,18 @@ class BigBookHunter::Book
 			the_book.author = abe_book.css("p.author").css("strong").inner_text
 			the_book.price = abe_book.css("meta[itemprop='price']").attr("content").value
 			the_book.url = abe_book.css("a").attr("href").value
-			# the_book.year = abe_book.css("meta[itemprop='datePublished']").attr("content").value
+			
+			# Fix for listings that don't include a publication date
+			if abe_book.include?("datePublished")
+				the_book.year = abe_book.css("meta[itemprop='datePublished']").attr("content").value
+			else
+				the_book.year = "DATE UNKNOWN"
+			end
 
-			@@books << the_book			
+			# Spam filter for bad dealers
+			if the_book.dealer.downcase != ("Ergodebooks".downcase || "Bookdonors CIC".downcase || "FORTIUS LTD".downcase || "Ruslania".downcase || "Mediaoutlet12345".downcase)
+				@@books << the_book
+			end			
 		end
 	end
 
