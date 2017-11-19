@@ -2,11 +2,19 @@ class BigBookHunter::Book
 	attr_accessor :dealer, :author, :title, :year, :price, :url
 
 	def self.current
-		#returns an array of currently available books
-		#temp return:
 		puts "The big books on the market today are:"
-		# puts "1. WILLIAM REESE - HAMILTON, Alexander. The Federalist. 1788. $185,000."
-		# puts "2. BAUMAN RARE BOOKS - VOLTAIRE. Candide. 1759. $65,000."
+		self.scrape_books
+	end
+
+	def self.scrape_books
+		books = []
+
+	#Go to ABE, find books
+	#Scrape properties
+	#Instantiate a book
+	#Eventually expand to dealer pages
+
+		books << self.scrape_ABE
 
 		book_1 = self.new
 		book_1.dealer = "WILLIAM REESE"
@@ -15,6 +23,7 @@ class BigBookHunter::Book
 		book_1.year = "1788"
 		book_1.price = "$185,000"
 		book_1.url = "http://www.billreesetest.com"
+		books << book_1
 
 		book_2 = self.new
 		book_2.dealer = "BAUMAN RARE BOOKS"
@@ -23,8 +32,13 @@ class BigBookHunter::Book
 		book_2.year = "1759"
 		book_2.price = "$65,000"
 		book_2.url = "http://www.brbtest.com"
+		books << book_2
 
-		return [book_1, book_2]
+		books
+	end
+
+	def self.scrape_ABE
+		
 	end
 
 end

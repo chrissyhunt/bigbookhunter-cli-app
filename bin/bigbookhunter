@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
 require './lib/bigbookhunter'
+require 'nokogiri'
+require 'pry'
 
 BigBookHunter::CLI.new.call
