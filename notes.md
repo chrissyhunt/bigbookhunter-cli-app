@@ -18,3 +18,9 @@ What is a book?
 - Has a URL for more info
 - Has a description of historical/cultural value (???)
 
+ABE Dealers to exclude:
+Ergodebooks
+Bookdonors CIC
+FORTIUS LTD
+Ruslania
+Mediaoutlet12345

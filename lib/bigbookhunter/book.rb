@@ -9,12 +9,8 @@ class BigBookHunter::Book
 	def self.scrape_books
 		books = []
 
-	#Go to ABE, find books
-	#Scrape properties
-	#Instantiate a book
-	#Eventually expand to dealer pages
-
 		books << self.scrape_ABE
+		# books << self.scrape_dealers
 
 		book_1 = self.new
 		book_1.dealer = "WILLIAM REESE"
@@ -38,7 +34,14 @@ class BigBookHunter::Book
 	end
 
 	def self.scrape_ABE
-		
+		doc = Nokogiri::HTML(open("https://www.abebooks.com/servlet/SearchResults?bi=0&bx=off&ds=50&kn=.&prl=10000&recentlyadded=2day&sortby=1&cm_sp=pan-_-srp-_-rate")).css("div.result-set")
+		binding.pry
+		# dealer = doc.css("div.result-detail").first.css("div.bookseller-info").css("p").css("a").attr("title").value
+		# title = doc.css("div.result-detail").first.css("a").attr("title").value
+		# author = doc.css("div.result-detail").first.css("p.author").css("strong").inner_text
+		# year = doc.css("div.result-detail").first.css("meta[itemprop='datePublished']").attr("content").value
+		# price = doc.css("div.result-detail").first.css("meta[itemprop='price']").attr("content").value
+		# url = doc.css("div.result-detail").first.css("a").attr("href").value
 	end
 
 end
