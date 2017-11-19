@@ -10,7 +10,7 @@ class BigBookHunter::CLI
 	def list_books
 		@books = BigBookHunter::Book.current
 		@books.each.with_index(1) do |book, i|
-			puts "#{i}. #{book.dealer} - #{book.author}. #{book.title}. #{book.year}. #{book.price}."
+			puts "#{i}. #{book.dealer.upcase} - #{book.author}. #{book.title}. #{book.year}. #{book.price}."
 		end
 	end
 
