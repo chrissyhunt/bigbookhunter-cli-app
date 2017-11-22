@@ -4,11 +4,17 @@ class BigBookHunter::Book
 	@@books = []
 
 	def self.current
-		puts "The big books on the market today are:"
+		puts "The new big books on the market today are:"
+		puts " "
 		self.scrape_books
 	end
 
+	def self.clear_all
+		@@books.clear
+	end
+
 	def self.scrape_books
+		self.clear_all
 		self.scrape_ABE
 		# self.scrape_dealers
 
@@ -35,7 +41,7 @@ class BigBookHunter::Book
 			end
 
 			# Spam filter for bad dealers
-			if !the_book.dealer.match(/Ergodebooks|Bookdonors CIC|FORTIUS LTD|Ruslania|Mediaoutlet12345|PreLoved ltd/)
+			if !the_book.dealer.match(/Ergodebooks|Bookdonors CIC|FORTIUS LTD|Ruslania|Mediaoutlet12345|PreLoved ltd|HPB-Diamond/)
 				@@books << the_book
 			end			
 		end

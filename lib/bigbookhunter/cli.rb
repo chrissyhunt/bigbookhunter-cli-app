@@ -1,6 +1,8 @@
 class BigBookHunter::CLI
 
 	def call
+		puts "---"
+		puts " "
 		puts "Welcome to Big Book Hunter!"
 		list_books
 		menu
@@ -8,13 +10,15 @@ class BigBookHunter::CLI
 	end
 
 	def list_books
+		puts " "
 		@books = BigBookHunter::Book.current
 		@books.each.with_index(1) do |book, i|
-			puts "#{i}. #{book.dealer.upcase} - #{book.author}. #{book.title}. #{book.year}. #{book.price}."
+			puts "#{i}. #{book.dealer.upcase} - #{book.author}. #{book.title[0..50]} #{book.year}. #{book.price}."
 		end
 	end
 
 	def menu
+		puts " "
 		puts "Enter the book number for more information, type \'list\' to see all books again, or type \'exit.\'"
 		input = nil
 		while input != "exit"
@@ -44,6 +48,7 @@ class BigBookHunter::CLI
 	end
 
 	def goodbye
+		puts " "
 		puts "See you tomorrow for more books!"
 	end
 end
