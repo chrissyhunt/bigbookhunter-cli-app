@@ -33,7 +33,7 @@ class BigBookHunter::Book
 			end
 
 			# Spam filter for bad dealers
-			if the_book.dealer != ("Ergodebooks" || "Bookdonors CIC" || "FORTIUS LTD" || "Ruslania" || "Mediaoutlet12345")
+			if !the_book.dealer.match(/Ergodebooks|Bookdonors CIC|FORTIUS LTD|Ruslania|Mediaoutlet12345/)
 				@@books << the_book
 			end			
 		end
