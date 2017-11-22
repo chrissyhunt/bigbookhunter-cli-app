@@ -21,7 +21,20 @@ class BigBookHunter::CLI
 			input = gets.strip.downcase
 			if input.to_i > 0
 				the_book = @books[input.to_i-1]
-				puts "#{the_book.dealer} - #{the_book.author}. #{the_book.title}. #{the_book.year}. #{the_book.price}."
+				puts "---"
+				puts " "
+				puts "DEALER: #{the_book.dealer}"
+				puts "AUTHOR: #{the_book.author}"
+				puts "TITLE: #{the_book.title}"
+				puts "YEAR PUBLISHED: #{the_book.year}"
+				puts " "
+				puts "PRICE: #{the_book.price}"
+				puts " "
+				puts "ITEM DESCRIPTION: \n#{the_book.description}"
+				puts " "
+				puts "FOR MORE INFO: \n#{the_book.url}"
+				puts " "
+				puts "---"
 			elsif input == 'list'
 				list_books
 			else

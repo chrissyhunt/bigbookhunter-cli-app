@@ -26,11 +26,9 @@ Ruslania
 Mediaoutlet12345
 
 ERRORS:
-- Not weeding out FORTIUS LTD
-- list_books scrapes again and adds to global array every time it's run (because of Book.current) -- add "clear" method?
+- list_books scrapes again and adds to global array every time it's run (because of Book.current) -- add "clear" method? (at beginning of scrape)
 
 NEEDS WORK:
-- Use array in dealer spam filter
 - Add dealer website scraper
 - Currency type & formatting
 - General formatting: trim list titles, currency, spacing
