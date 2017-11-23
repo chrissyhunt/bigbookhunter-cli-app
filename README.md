@@ -1,8 +1,6 @@
-# Bigbookhunter
+# Big Book Hunter
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/bigbookhunter`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Welcome to the "Big Book Hunter" gem! This CLI app scrapes the popular used and rare books marketplace, AbeBooks.com, for new listings of rare books priced above $10,000 to help you stay on top of notable new books and documents on the market. (It also screens out sellers who frequently post spam listings or unrelated material, in order to make this a more useful tool for the true hunter!)
 
 ## Installation
 
@@ -22,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Run `bin/bigbookhunter` after installing the gem.
 
 ## Development
 
