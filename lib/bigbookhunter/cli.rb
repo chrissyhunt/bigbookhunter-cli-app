@@ -13,7 +13,7 @@ class BigBookHunter::CLI
 		puts " "
 		@books = BigBookHunter::Book.current
 		@books.each.with_index(1) do |book, i|
-			puts "#{i}. #{book.dealer.upcase} - #{book.author}. #{book.title[0..50]} #{book.year}. #{book.price}."
+			puts "#{i}. #{book.dealer.upcase} - #{book.author}. #{book.title[0..50]}. #{book.year}. #{book.price}."
 		end
 	end
 
