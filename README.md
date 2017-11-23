@@ -1,6 +1,8 @@
 # Big Book Hunter
 
-Welcome to the "Big Book Hunter" gem! This CLI app scrapes the popular used and rare books marketplace, AbeBooks.com, for new listings of rare books priced above $10,000 to help you stay on top of notable new books and documents on the market. (It also screens out sellers who frequently post spam listings or unrelated material, in order to make this a more useful tool for the true hunter!)
+Welcome to the "Big Book Hunter" gem! 
+
+If you want to hunt for big books, you have to stay on top of the market. This CLI app scrapes two popular rare books online marketplaces, AbeBooks.com and ABAA.org, for new listings of rare books priced above $10,000. It also cross-checks listings for duplicate records of the same copy, and screens out ABE sellers who frequently post spam listings or unrelated material.
 
 ## Installation
 
