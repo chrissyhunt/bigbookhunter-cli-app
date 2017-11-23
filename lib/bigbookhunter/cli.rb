@@ -25,9 +25,9 @@ class BigBookHunter::CLI
 			input = gets.strip.downcase
 			if input.to_i > 0
 				the_book = @books[input.to_i-1]
-				if the_book.list_source == "ABAA"
-					BigBookHunter::Book.scrape_ABAA_description(the_book, the_book.url)
-				end
+
+				BigBookHunter::Book.scrape_ABAA_description(the_book, the_book.url) if the_book.list_source == "ABAA"
+				
 				puts "---"
 				puts " "
 				puts "DEALER: #{the_book.dealer}"
@@ -42,6 +42,7 @@ class BigBookHunter::CLI
 				puts "FOR MORE INFO: \n#{the_book.url}"
 				puts " "
 				puts "---"
+				
 			elsif input == 'list'
 				list_books
 			else

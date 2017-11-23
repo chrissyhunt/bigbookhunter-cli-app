@@ -17,8 +17,6 @@ class BigBookHunter::Book
 		self.clear_all
 		self.scrape_ABE
 		self.scrape_ABAA
-		#self.scrape_dealers (?)
-
 		@@books
 	end
 
@@ -36,12 +34,7 @@ class BigBookHunter::Book
 
 			# Fix for listings that don't include a publication date
 			if abe_book.css("p#publisher").length > 0
-				# binding.pry
-				if !abe_book.css("p#publisher").css("span")[1]
-					the_book.year = "DATE UNKNOWN"
-				else
-					the_book.year = abe_book.css("p#publisher").css("span")[1].inner_text.match(/([0-9]{4})/)
-				end
+				!abe_book.css("p#publisher").css("span")[1] ? the_book.year = "DATE UNKNOWN" : the_book.year = abe_book.css("p#publisher").css("span")[1].inner_text.match(/([0-9]{4})/)
 			else
 				the_book.year = "DATE UNKNOWN"
 			end
@@ -51,8 +44,6 @@ class BigBookHunter::Book
 				@@books << the_book
 			end			
 		end
-
-
 	end
 
 	def self.scrape_ABAA
@@ -66,13 +57,13 @@ class BigBookHunter::Book
 			the_book.url = "https://www.abaa.org#{abaa_book.css("div.text").css("h3").css("a").attr("href").value}"
 			the_book.year = abaa_book.css("div.text").css("p")[1].inner_text.match(/([0-9]{4})/)
 			the_book.list_source = "ABAA"
-			# description ==> need helper method!
 
-			# Check for dupes -- working, I think?
+			# Check for dupes
 			book_already_exists = @@books.any? do | book |
 				book.dealer[0..10] == the_book.dealer[0..10] && book.title[0..20] == the_book.title[0..20]
 			end
 
+			# Filter out dupes and spam sellers
 			if !book_already_exists && !the_book.dealer.match(/Ergodebooks|Bookdonors CIC|FORTIUS LTD|Ruslania|Mediaoutlet12345|PreLoved ltd|HPB-Diamond|Phoenix Antiquariat & Autographen|Lost Books/)
 				@@books << the_book
 			end

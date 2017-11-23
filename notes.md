@@ -28,11 +28,6 @@ Mediaoutlet12345
 PreLoved ltd
 Lost Books
 
-ERRORS:
-- 'exit' prints error message first
-
 NEEDS WORK:
 - Add dealer website scraper
-- Add helper method to scrape ABAA descriptions from item pages
-- Sort options? (by dealer - maybe later)
-- Create "Dealer" class to keep track of spam posters
+- Create "Dealer" class to keep track of spam posters, contact info for dealers listed?
