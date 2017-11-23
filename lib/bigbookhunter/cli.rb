@@ -50,5 +50,7 @@ class BigBookHunter::CLI
 	def goodbye
 		puts " "
 		puts "See you tomorrow for more books!"
+		puts " "
+		puts "---"
 	end
 end

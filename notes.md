@@ -24,15 +24,11 @@ Bookdonors CIC
 FORTIUS LTD
 Ruslania
 Mediaoutlet12345
+PreLoved ltd
 
 ERRORS:
-- list_books scrapes again and adds to global array every time it's run (because of Book.current) -- add "clear" method? (at beginning of scrape)
+- 'exit' prints error message first
 
 NEEDS WORK:
 - Add dealer website scraper
-- Currency type & formatting
-- General formatting: trim list titles, currency, spacing
-- Individual item "more info" readout
-- Add total "count" to intro message?
-- Format author names
 - Eliminate duplicate listings?
