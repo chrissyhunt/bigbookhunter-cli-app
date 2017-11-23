@@ -33,9 +33,6 @@ ERRORS:
 
 NEEDS WORK:
 - Add dealer website scraper
-- Eliminate duplicate listings?
 - Add helper method to scrape ABAA descriptions from item pages
-- Figure out how to get rid of "by" in ABAA author names
-- Prevent scrape_ABAA from adding duplicate listings to @@books (check title, dealer[0..10] -- should be consistent)
 - Sort options? (by dealer - maybe later)
 - Create "Dealer" class to keep track of spam posters

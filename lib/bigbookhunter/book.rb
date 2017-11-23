@@ -1,5 +1,5 @@
 class BigBookHunter::Book
-	attr_accessor :dealer, :author, :title, :year, :price, :url, :description
+	attr_accessor :dealer, :author, :title, :year, :price, :url, :description, :list_source
 
 	@@books = []
 
@@ -32,6 +32,7 @@ class BigBookHunter::Book
 			the_book.price = abe_book.css("div.item-price").css("span.price").inner_text
 			the_book.url = "http://www.abebooks.com#{abe_book.css("div.result-detail").css("a").attr("href").value}"
 			the_book.description = abe_book.css("p.clear-all").css("span").inner_text
+			the_book.list_source = "ABE"
 
 			# Fix for listings that don't include a publication date
 			if abe_book.css("p#publisher").length > 0
@@ -39,7 +40,7 @@ class BigBookHunter::Book
 				if !abe_book.css("p#publisher").css("span")[1]
 					the_book.year = "DATE UNKNOWN"
 				else
-					the_book.year = abe_book.css("p#publisher").css("span")[1].inner_text.match(/([0123456789]{4})/)
+					the_book.year = abe_book.css("p#publisher").css("span")[1].inner_text.match(/([0-9]{4})/)
 				end
 			else
 				the_book.year = "DATE UNKNOWN"
@@ -60,11 +61,11 @@ class BigBookHunter::Book
 			the_book = self.new
 			the_book.dealer = abaa_book.css("div.text").css("strong.offered").css("a").inner_text
 			the_book.title = abaa_book.css("div.text").css("h3").css("a").inner_text
-			# Get rid of "by" in author!
 			the_book.author = abaa_book.css("div.text").css("p")[0].inner_text.slice(3..-1)
 			the_book.price = abaa_book.css("div.cart-box").css("span.cost").inner_text
-			the_book.url = "http://www.abaa.org#{abaa_book.css("div.text").css("h3").css("a").attr("href").value}"
-			the_book.year = abaa_book.css("div.text").css("p")[1].inner_text.match(/([0123456789]{4})/)
+			the_book.url = "https://www.abaa.org#{abaa_book.css("div.text").css("h3").css("a").attr("href").value}"
+			the_book.year = abaa_book.css("div.text").css("p")[1].inner_text.match(/([0-9]{4})/)
+			the_book.list_source = "ABAA"
 			# description ==> need helper method!
 
 			# Check for dupes -- working, I think?
@@ -76,6 +77,10 @@ class BigBookHunter::Book
 				@@books << the_book
 			end
 		end
+	end
+
+	def self.scrape_ABAA_description(the_book, item_url)
+		the_book.description = Nokogiri::HTML(open(item_url)).css("div.item-description").inner_text.gsub(/^\s*/, '')
 	end
 
 end
