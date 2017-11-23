@@ -10,6 +10,7 @@ Steps:
 3. Stub out user interface (menus, list of books, etc.)
 3. Start scraping real data
 4. Clean up report
+5. ABE scraper working -> add ABAA scraper! (See steps above.)
 
 What is a book?
 - Has an author, title, year published

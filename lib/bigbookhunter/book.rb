@@ -16,7 +16,8 @@ class BigBookHunter::Book
 	def self.scrape_books
 		self.clear_all
 		self.scrape_ABE
-		# self.scrape_dealers
+		self.scrape_ABAA
+		#self.scrape_dealers (?)
 
 		@@books
 	end
@@ -51,6 +52,24 @@ class BigBookHunter::Book
 		end
 
 
+	end
+
+	def self.scrape_ABAA
+		all_books = Nokogiri::HTML(open("https://www.abaa.org/book/search/?action=search&added_after=3&fulltextadd=&sort=id_desc&results_per_page=100&author=&title=&fulltext=&publisher=&isbn=&minimum_price=10000&maximum_price=&minimum_publish_date=&maximum_publish_date=&format=&book_condition=")).css("section.box-book")
+		all_books.each do | abaa_book |
+			the_book = self.new
+			the_book.dealer = abaa_book.css("div.text").css("strong.offered").css("a").inner_text
+			the_book.title = abaa_book.css("div.text").css("h3").css("a").inner_text
+			# Get rid of "by" in author!
+			the_book.author = abaa_book.css("div.text").css("p")[0].inner_text
+			the_book.price = abaa_book.css("div.cart-box").css("span.cost").inner_text
+			the_book.url = "http://www.abaa.org#{abaa_book.css("div.text").css("h3").css("a").attr("href").value}"
+			the_book.year = abaa_book.css("div.text").css("p")[1].inner_text.match(/([0123456789]{4})/)
+			# description ==> need helper method!
+
+			# Conditional to prevent dupes...
+			@@books << the_book
+		end
 	end
 
 end
