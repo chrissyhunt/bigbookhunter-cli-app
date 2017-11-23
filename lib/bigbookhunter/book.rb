@@ -46,7 +46,7 @@ class BigBookHunter::Book
 			end
 
 			# Spam filter for bad dealers
-			if !the_book.dealer.match(/Ergodebooks|Bookdonors CIC|FORTIUS LTD|Ruslania|Mediaoutlet12345|PreLoved ltd|HPB-Diamond|Phoenix Antiquariat & Autographen/)
+			if !the_book.dealer.match(/Ergodebooks|Bookdonors CIC|FORTIUS LTD|Ruslania|Mediaoutlet12345|PreLoved ltd|HPB-Diamond|Phoenix Antiquariat & Autographen|Lost Books/)
 				@@books << the_book
 			end			
 		end
@@ -61,14 +61,20 @@ class BigBookHunter::Book
 			the_book.dealer = abaa_book.css("div.text").css("strong.offered").css("a").inner_text
 			the_book.title = abaa_book.css("div.text").css("h3").css("a").inner_text
 			# Get rid of "by" in author!
-			the_book.author = abaa_book.css("div.text").css("p")[0].inner_text
+			the_book.author = abaa_book.css("div.text").css("p")[0].inner_text.slice(3..-1)
 			the_book.price = abaa_book.css("div.cart-box").css("span.cost").inner_text
 			the_book.url = "http://www.abaa.org#{abaa_book.css("div.text").css("h3").css("a").attr("href").value}"
 			the_book.year = abaa_book.css("div.text").css("p")[1].inner_text.match(/([0123456789]{4})/)
 			# description ==> need helper method!
 
-			# Conditional to prevent dupes...
-			@@books << the_book
+			# Check for dupes -- working, I think?
+			book_already_exists = @@books.any? do | book |
+				book.dealer[0..10] == the_book.dealer[0..10] && book.title[0..20] == the_book.title[0..20]
+			end
+
+			if !book_already_exists && !the_book.dealer.match(/Ergodebooks|Bookdonors CIC|FORTIUS LTD|Ruslania|Mediaoutlet12345|PreLoved ltd|HPB-Diamond|Phoenix Antiquariat & Autographen|Lost Books/)
+				@@books << the_book
+			end
 		end
 	end
 
