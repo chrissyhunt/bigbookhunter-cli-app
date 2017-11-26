@@ -32,15 +32,13 @@ class BigBookHunter::Book
 			the_book.description = abe_book.css("p.clear-all").css("span").inner_text
 			the_book.list_source = "ABE"
 
-			# Fix for listings that don't include a publication date
 			if abe_book.css("p#publisher").length > 0
 				!abe_book.css("p#publisher").css("span")[1] ? the_book.year = "DATE UNKNOWN" : the_book.year = abe_book.css("p#publisher").css("span")[1].inner_text.match(/([0-9]{4})/)
 			else
 				the_book.year = "DATE UNKNOWN"
 			end
 
-			# Spam filter for bad dealers
-			if !the_book.dealer.match(/Ergodebooks|Bookdonors CIC|FORTIUS LTD|Ruslania|Mediaoutlet12345|PreLoved ltd|HPB-Diamond|Phoenix Antiquariat & Autographen|Lost Books/)
+			if !bad_seller?(the_book)
 				@@books << the_book
 			end			
 		end
@@ -58,13 +56,7 @@ class BigBookHunter::Book
 			the_book.year = abaa_book.css("div.text").css("p")[1].inner_text.match(/([0-9]{4})/)
 			the_book.list_source = "ABAA"
 
-			# Check for dupes
-			book_already_exists = @@books.any? do | book |
-				book.dealer[0..10] == the_book.dealer[0..10] && book.title[0..20] == the_book.title[0..20]
-			end
-
-			# Filter out dupes and spam sellers
-			if !book_already_exists && !the_book.dealer.match(/Ergodebooks|Bookdonors CIC|FORTIUS LTD|Ruslania|Mediaoutlet12345|PreLoved ltd|HPB-Diamond|Phoenix Antiquariat & Autographen|Lost Books/)
+			if !book_already_exists?(the_book)
 				@@books << the_book
 			end
 		end
@@ -72,6 +64,16 @@ class BigBookHunter::Book
 
 	def self.scrape_ABAA_description(the_book, item_url)
 		the_book.description = Nokogiri::HTML(open(item_url)).css("div.item-description").inner_text.gsub(/^\s*/, '')
+	end
+
+	def self.bad_seller?(the_book)
+		the_book.dealer.match(/Ergodebooks|Bookdonors CIC|FORTIUS LTD|Ruslania|Mediaoutlet12345|PreLoved ltd|HPB-Diamond|Phoenix Antiquariat & Autographen|Lost Books|8trax Media|DontPayMore/)
+	end
+
+	def self.book_already_exists?(the_book)
+		@@books.any? do | book |
+			book.dealer[0..10] == the_book.dealer[0..10] && book.title[0..20] == the_book.title[0..20]
+		end
 	end
 
 end

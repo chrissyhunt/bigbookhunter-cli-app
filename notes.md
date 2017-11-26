@@ -27,7 +27,5 @@ Ruslania
 Mediaoutlet12345
 PreLoved ltd
 Lost Books
-
-NEEDS WORK:
-- Add dealer website scraper
-- Create "Dealer" class to keep track of spam posters, contact info for dealers listed?
+8trax Media
+DontPayMore
