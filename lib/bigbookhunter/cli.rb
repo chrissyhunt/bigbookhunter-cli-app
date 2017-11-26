@@ -43,7 +43,7 @@ class BigBookHunter::CLI
 				puts " "
 				puts "---"
 				
-			elsif input == 'list'
+			elsif input == "list"
 				list_books
 			else
 				puts "Not sure what you want. Type \'list\' or \'exit\'." unless input == "exit"
