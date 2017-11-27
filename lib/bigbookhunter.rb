@@ -6,3 +6,4 @@ end
 
 require_relative './bigbookhunter/cli'
 require_relative './bigbookhunter/book'
+require_relative './bigbookhunter/scraper'
