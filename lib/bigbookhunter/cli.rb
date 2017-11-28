@@ -23,10 +23,10 @@ class BigBookHunter::CLI
 		input = nil
 		while input != "exit"
 			input = gets.strip.downcase
-			if input.to_i > 0
+			if input.to_i > 0 && input.to_i < @books.length
 				the_book = @books[input.to_i-1]
 
-				BigBookHunter::Book.scrape_ABAA_description(the_book, the_book.url) if the_book.list_source == "ABAA"
+				BigBookHunter::Scraper.scrape_ABAA_description(the_book, the_book.url) if the_book.list_source == "ABAA"
 				
 				puts "---"
 				puts " "
@@ -46,7 +46,7 @@ class BigBookHunter::CLI
 			elsif input == "list"
 				list_books
 			else
-				puts "Not sure what you want. Type \'list\' or \'exit\'." unless input == "exit"
+				puts "That's not an option. Please type \'list\' or \'exit\'." unless input == "exit"
 			end
 		end
 	end

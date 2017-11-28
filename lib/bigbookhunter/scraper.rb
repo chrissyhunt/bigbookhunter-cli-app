@@ -11,12 +11,11 @@ class BigBookHunter::Scraper
 		all_books = Nokogiri::HTML(open("https://www.abebooks.com/servlet/SearchResults?bi=0&bx=off&ds=50&kn=.&prl=10000&recentlyadded=2day&sortby=1&cm_sp=pan-_-srp-_-rate")).css("div.result-set div.cf.result")
 		all_books.each do | abe_book |
 			the_book = BigBookHunter::Book.new
-			# binding.pry
-			the_book.dealer = abe_book.css("div.bookseller-info p a").attr("title").value
+			the_book.dealer = abe_book.css("div.bookseller-info p a")[0].inner_text
 			the_book.title = abe_book.css("a span").inner_text
 			the_book.author = abe_book.css("p.author strong").inner_text
 			the_book.price = abe_book.css("div.item-price span.price").inner_text
-			the_book.url = "http://www.abebooks.com#{abe_book.css("div.result-detail a").attr("href").value}"
+			the_book.url = "http://www.abebooks.com/#{abe_book.css("div.result-detail h2 a").attr("href").value}"
 			the_book.description = abe_book.css("p.clear-all span").inner_text
 			the_book.list_source = "ABE"
 
@@ -55,12 +54,11 @@ class BigBookHunter::Scraper
 	end
 
 	def self.bad_seller?(the_book)
-		the_book.dealer.match(/Ergodebooks|Bookdonors CIC|FORTIUS LTD|Ruslania|Mediaoutlet12345|PreLoved ltd|HPB-Diamond|Phoenix Antiquariat & Autographen|Lost Books|8trax Media|DontPayMore|Rem Distributors/)
+		the_book.dealer.match(/Ergodebooks|Bookdonors CIC|FORTIUS LTD|Ruslania|Mediaoutlet12345|PreLoved ltd|HPB-Diamond|Phoenix Antiquariat & Autographen|Lost Books|8trax Media|DontPayMore|Rem Distributors|BB Textbooks|Librerias Prometeo|Bookmans/)
 	end
 
 	def self.book_already_exists?(the_book)
 		BigBookHunter::Book.all_books.any? do | book |
-			# binding.pry
 			book.dealer[0..10] == the_book.dealer[0..10] && book.title[0..20] == the_book.title[0..20]
 		end	
 	end		
