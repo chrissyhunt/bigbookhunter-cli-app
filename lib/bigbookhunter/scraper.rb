@@ -54,7 +54,7 @@ class BigBookHunter::Scraper
 	end
 
 	def self.bad_seller?(the_book)
-		the_book.dealer.match(/Ergodebooks|Bookdonors CIC|FORTIUS LTD|Ruslania|Mediaoutlet12345|PreLoved ltd|HPB-Diamond|Phoenix Antiquariat & Autographen|Lost Books|8trax Media|DontPayMore|Rem Distributors|BB Textbooks|Librerias Prometeo|Bookmans/)
+		the_book.dealer.match(/Ergodebooks|Bookdonors CIC|FORTIUS LTD|Ruslania|Mediaoutlet12345|PreLoved ltd|HPB-Diamond|Phoenix Antiquariat & Autographen|Lost Books|8trax Media|DontPayMore|Rem Distributors|BB Textbooks|Librerias Prometeo|Bookmans|Llibreria Antiquària Catedral/)
 	end
 
 	def self.book_already_exists?(the_book)
